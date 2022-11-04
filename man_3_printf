@@ -1,31 +1,101 @@
-.TH man 3 "19 April 2022" "0.01" "_printf man page"
+.\" manpage for _printf
+.\" By Van and John
+.TH _printf 3 "19 March 2019" "Version 1.1" "_printf manpage"
 .SH NAME
-.B _printf
-- A simple re-creation of the printf function
+_printf - A simple version of printf, prints the provided arguments
 .SH SYNOPSIS
-To use this function the #include "main.h" header is needed.
+.B #include \(dqholberton.h\(dq
+.br
+ 
+.br
+.B int _printf(const char *
+.R format
+.B , ...);
 .SH DESCRIPTION
-The _printf() function produces output according to a format which is described
-below. This function write its output to the stdout, the standard output stream.
-.SH USAGE
-To use _printf you have to use the following key characters preceeded by % symbol.
-.RS 3
-%c: To be used to print characters
-.RS 0
-%s: To be used to print strings
-.RS 0
-%d: To print integers of max and min size of an int type
-.RS 0
-%i: To print integers of max and min size of an int type
-.RS 0
-%b: To print a number in binary form
-.SH RETURN VALUES
-The _printf() function returns an integer representing the number of symbols
-printed not counting \\0 for the string.
-.SH SEE ALSO
-.I printf(3)
-.SH BUGS
-No known bugs.
-.SH AUTHOR
-Birkity Yishak
-Abraham Alemseged
+A simple version of
+.B printf()
+it reproduces the
+.B %c
+,
+.B %s
+,
+.B %i
+,
+.B %d
+, functionality of
+.B printf().
+This simple version of
+.B printf()
+writes the input characters and values to stdout, the standard output stream.
+Also takes the %R argument and outputs the rot 13 values of the supplied string.
+.br
+.B Return value
+.br
+This function will return the number of characters printed, not including the
+null byte, unless it encounters an error in which case it will return -1.
+.br
+.B The conversion specifier
+.br
+To use a conversion specifier
+.B (c, s, d, i, R)
+type
+.B %
+followed by the deseired conversion specifier.
+.br
+.B c
+.br
+	Prints a single character of type char. Will convert an int to a char,
+	the coresponding ascii value is printed if an int is provided.
+.br
+.B S
+.br
+	Prints a string of type char *. Does not include the null byte.
+.br
+.B d, i
+.br
+	Prints a number of type int.
+.br
+.B R
+	prints the rot13 values of the supplied string.
+.br
+.SH CONFORMING TO
+.B _printf
+conforms to all known C standards
+.SH Bugs
+%R for rot 13 does not handle embeded numbers.
+.br
+.SH EXAMPLE
+#include "holberton.h"
+.br
+ 
+.br
+int main(void)
+.br
+{
+.br
+	_printf("Hello %s\\n", "World"); /*will print Hello World to the standard output.*/
+.br
+	_printf("%c\\n", "Hello"); /*will print H to the standard output.*/
+.br
+	_printf("%d\\n", 123); /*will print 123 to the standard output.*/
+.br
+	_printf("%i\\n", 456); /*will print 456 to the standard output.*/
+.br
+return (0);
+.br
+}
+.br
+.B Output
+.br
+Hello World
+.br
+H
+.br
+123
+.br
+456
+.br
+.SH AUTHORS
+Van Duy Phan
+.br
+John Cook

@@ -1,66 +1,63 @@
-#include "main.h"
-
+#include "holberton.h"
 /**
- * print_number - prints a number send to this function
- * @args: List of arguments
- * Return: The number of arguments printed
+ *print_number - prints a number with recursion.
+ *@n: integer value.
+ *
+ *Return: Nothing.
  */
-int print_number(va_list args)
+void print_number(int n)
 {
-	int n;
-	int div;
-	int len;
-	unsigned int num;
+	unsigned int i;
 
-	n  = va_arg(args, int);
-	div = 1;
-	len = 0;
+	i = n;
+	if (n < 0)
+	{
+		_putchar('-');
+		i = -n;
+	}
+	if (i / 10 != 0)
+	{
+		print_number(i / 10);
+	}
+	_putchar(i % 10 + '0');
+}
+/**
+ *count - count number of recursion.
+ *@n: number value.
+ *
+ *Return: the count of recursion.
+ */
+int count(int n)
+{
+	unsigned int j;
+	int c = 0;
 
 	if (n < 0)
 	{
-		len += _write_char('-');
-		num = n * -1;
+		j = -n;
 	}
 	else
-		num = n;
-
-	for (; num / div > 9; )
-		div *= 10;
-
-	for (; div != 0; )
+		j = n;
+	while (j)
 	{
-		len += _write_char('0' + num / div);
-		num %= div;
-		div /= 10;
+		j /= 10;
+		c++;
 	}
-
-	return (len);
+	return (c);
 }
 /**
- * print_unsgined_number - Prints an unsigned number
- * @n: unsigned integer to be printed
- * Return: The amount of numbers printed
+ *print_i - print integer.
+ *@list: list of arguments.
+ *
+ *Return: j.
  */
-int print_unsgined_number(unsigned int n)
+int print_i(va_list list)
 {
-	int div;
-	int len;
-	unsigned int num;
+	int n = va_arg(list, int);
+	int c = count(n);
 
-	div = 1;
-	len = 0;
-
-	num = n;
-
-	for (; num / div > 9; )
-		div *= 10;
-
-	for (; div != 0; )
-	{
-		len += _write_char('0' + num / div);
-		num %= div;
-		div /= 10;
-	}
-
-	return (len);
+	if (n <= 0)
+		c++;
+	print_number(n);
+	return (c);
 }
